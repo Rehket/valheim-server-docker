@@ -31,13 +31,13 @@ def write_config(config: ConfigParser, config_file: str) -> None:
         log.info(f"Mod config directory {config_directory} does not exist - creating")
         os.makedirs(config_directory)
 
-    new_config_file = config_file + ".tmp"
+    new_config_file = f"{config_file}.tmp"
     log.info(f"Writing mod config {new_config_file}")
     with open(new_config_file, "w") as file:
         config.write(file, space_around_delimiters=False)
 
     if os.path.isfile(config_file):
-        old_config_file = config_file + ".old"
+        old_config_file = f"{config_file}.old"
         log.info(f"Moving old config {config_file} -> {old_config_file}")
         os.replace(config_file, old_config_file)
 

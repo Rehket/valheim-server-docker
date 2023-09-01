@@ -17,9 +17,9 @@ parser = get_arg_parser()
 add_args(parser)
 args = parser.parse_args()
 
-test_var1 = args.env_prefix + "Server_test"
-test_var2 = args.env_prefix + "Logging_DOT_Console_Enabled"
-test_var3 = args.env_prefix + "Logging_DOT_Console_Some_UNDERSCORE_Var"
+test_var1 = f"{args.env_prefix}Server_test"
+test_var2 = f"{args.env_prefix}Logging_DOT_Console_Enabled"
+test_var3 = f"{args.env_prefix}Logging_DOT_Console_Some_UNDERSCORE_Var"
 os.environ[test_var1] = "true"
 os.environ[test_var2] = "true"
 os.environ[test_var3] = "false"
@@ -57,8 +57,7 @@ def test_read_write_config():
 
     config = ConfigParser()
     config.optionxform = str
-    config["Server"] = {}
-    config["Server"]["test"] = "true"
+    config["Server"] = {"test": "true"}
     write_config(config, config_file)
 
     new_config = get_config(config_file)
